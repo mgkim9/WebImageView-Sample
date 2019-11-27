@@ -3,11 +3,13 @@ package com.mgkim.sample.di.module
 import com.mgkim.sample.di.module.ui.GalleryModule
 import com.mgkim.sample.di.module.ui.HomeModule
 import com.mgkim.sample.di.module.ui.SearchImageModule
+import com.mgkim.sample.di.module.ui.SlideshowModule
 import com.mgkim.sample.ui.base.view.BaseActivity
 import com.mgkim.sample.ui.gallery.view.GalleryFragment
 import com.mgkim.sample.ui.home.view.HomeFragment
 import com.mgkim.sample.ui.home.view.MainActivity
 import com.mgkim.sample.ui.imagesearch.view.SearchImageFragment
+import com.mgkim.sample.ui.slideshow.view.SlideshowFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -27,9 +29,9 @@ abstract class ActivityBindModule {
     @ContributesAndroidInjector(modules = [GalleryModule::class])
     abstract fun bindGalleryFragment(): GalleryFragment
 
-//    // Slideshow
-//    @ContributesAndroidInjector(modules = [SlideshowModule::class])
-//    abstract fun bindSlideshowFragment(): SlideshowFragment
+    // Slideshow
+    @ContributesAndroidInjector(modules = [SlideshowModule::class])
+    abstract fun bindSlideshowFragment(): SlideshowFragment
 
     // Tools
     @ContributesAndroidInjector(modules = [SearchImageModule::class])

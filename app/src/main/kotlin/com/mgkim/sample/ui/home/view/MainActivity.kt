@@ -77,23 +77,15 @@ class MainActivity : BaseActivity() {
     // Disk cache clear
     private fun clearDiskCache() {
         // io 동작이므로 RequestLocal를 이용하여 비동기 처리
-        RequestLocal<Void?>()
-            .setDoInBackground(object : IDoInBackground<Void?> {
-                override fun doInBackground(): Void? {  // 수행할 local 작업
-                    NetManager.diskCacheClear()
-                    GlideApp.get(this@MainActivity).clearDiskCache()
-                    return null
-                }
-            }).setReceiver(object : IResultReceiver<Void?> {    // request 결과
-                override fun onResult(isSuccess: Boolean, obj: IRequest<Void?>) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "item_remove_cache_file finish",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }).useHandler() //결과(onResult)를 mainThread에서 수행 함
+        RequestLocal<Void?>().setDoInBackground {
+            // 수행할 local 작업
+            NetManager.diskCacheClear()
+            GlideApp.get(this@MainActivity).clearDiskCache()
+            null
+        }.setReceiver { isSuccess, obj ->
+            // request 결과
+            Toast.makeText(this@MainActivity, "item_remove_cache_file finish", Toast.LENGTH_LONG).show()
+        }.useHandler() //결과(onResult)를 mainThread에서 수행 함
             .addReq()   // Request 시작
     }
 }
-

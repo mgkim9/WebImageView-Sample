@@ -22,22 +22,18 @@ class GalleryViewModel : BaseViewModel() {
         val wrapper = LiveWrapper<List<String>>()
         mutableLoadingSubject.value = true
         RequestLocal<List<String>>()
-            .setDoInBackground(object : IDoInBackground<List<String>> {
-                override fun doInBackground(): ArrayList<String> {  // 수행할 local 작업
-                    return imageParser(GETTY_URL)
+            .setDoInBackground {
+                imageParser(GETTY_URL)
+            }.setReceiver { isSuccess, obj ->
+                if (isSuccess) {
+                    mutableImages.value = wrapper.success(obj.getResult())
+                } else {
+                    mutableImages.value = wrapper.error(throw Throwable(), fun() {
+                        reqImages()
+                    })
                 }
-            }).setReceiver(object : IResultReceiver<List<String>> {    // request 결과
-                override fun onResult(isSuccess: Boolean, obj: IRequest<List<String>>) {
-                    if(isSuccess) {
-                        mutableImages.value = wrapper.success(obj.getResult())
-                    } else {
-                        mutableImages.value = wrapper.error(throw Throwable(), fun() {
-                            reqImages()
-                        })
-                    }
-                    mutableLoadingSubject.value = false
-                }
-            }).useHandler() //결과(onResult)를 mainThread에서 수행 함
+                mutableLoadingSubject.value = false
+            }.useHandler() //결과(onResult)를 mainThread에서 수행 함
             .addReq()
     }
 

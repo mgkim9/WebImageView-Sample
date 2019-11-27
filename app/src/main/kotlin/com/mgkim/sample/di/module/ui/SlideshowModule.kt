@@ -7,7 +7,6 @@ import com.mgkim.sample.ui.slideshow.view.SlideshowFragment
 import dagger.Module
 import dagger.Provides
 
-@Deprecated("NotUse")
 @Module
 class SlideshowModule {
 
