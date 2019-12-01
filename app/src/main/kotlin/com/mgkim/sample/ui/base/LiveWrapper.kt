@@ -1,4 +1,7 @@
 package com.mgkim.sample.ui.base
+
+import kotlin.Exception
+
 /**
 * Request 상태를 갖도록 감싸주는 Wrapper class
 * @author : mgkim
@@ -24,7 +27,7 @@ class LiveWrapper<T> {
         return this
     }
 
-    fun error(error: Throwable, retryCallback: (() -> Unit?)? = null, cancelCallback: (() -> Unit?)? = null): LiveWrapper<T> {
+    fun error(error: Throwable?, retryCallback: (() -> Unit?)? = null, cancelCallback: (() -> Unit?)? = null): LiveWrapper<T> {
         this.status = Status.ERROR
         this.error = error
         this.retryCallback = retryCallback

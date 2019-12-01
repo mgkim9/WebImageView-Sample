@@ -147,6 +147,6 @@ open class BaseViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        jobDisposable.clear()
+        jobDisposable.dispose()
     }
 }

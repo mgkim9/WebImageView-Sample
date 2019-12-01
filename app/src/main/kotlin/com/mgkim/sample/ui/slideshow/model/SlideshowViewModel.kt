@@ -30,7 +30,7 @@ class SlideshowViewModel : BaseViewModel() {
                 if (isSuccess) {
                     mutableImage.value = wrapper.success(obj.getResult())
                 } else {
-                    mutableImage.value = wrapper.error(throw Throwable(), fun() {
+                    mutableImage.value = wrapper.error(obj.exception, fun() {
                         requestPhoto(id)
                     })
                 }
@@ -47,7 +47,7 @@ class SlideshowViewModel : BaseViewModel() {
                 if (isSuccess) {
                     mutableImages.value = wrapper.success(obj.getResult())
                 } else {
-                    mutableImages.value = wrapper.error(throw Throwable(), fun() {
+                    mutableImages.value = wrapper.error(obj.exception, fun() {
                         requestPhotos()
                     })
                 }

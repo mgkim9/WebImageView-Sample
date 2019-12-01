@@ -25,6 +25,73 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_gallery" />
 
+
+    <LinearLayout
+        android:id="@+id/llTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnParse">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:background="@color/i_bg_01"
+            android:maxLines="1"
+            android:paddingVertical="5dp"
+            android:text="WebImageView"
+            android:textAlignment="center"
+            android:textColor="@color/i_red"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:background="@color/i_bg_02"
+            android:maxLines="1"
+            android:paddingVertical="5dp"
+            android:text="Glide"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:background="@color/i_bg_01"
+            android:maxLines="1"
+            android:paddingVertical="5dp"
+            android:text="WebImageView"
+            android:textAlignment="center"
+            android:textColor="@color/i_red"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:background="@color/i_bg_02"
+            android:maxLines="1"
+            android:paddingVertical="5dp"
+            android:text="Glide"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
@@ -32,7 +99,8 @@
         android:layout_marginHorizontal="16dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnParse"
-        app:spanCount="3" />
+        app:layout_constraintTop_toBottomOf="@+id/llTitle"
+        app:spanCount="4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

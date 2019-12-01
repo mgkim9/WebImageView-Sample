@@ -5,9 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.mgkim.sample.constants.GETTY_URL
 import com.mgkim.sample.ui.base.BaseViewModel
 import com.mgkim.sample.ui.base.LiveWrapper
-import com.mgkim.libs.webimageview.IDoInBackground
-import com.mgkim.libs.webimageview.IRequest
-import com.mgkim.libs.webimageview.IResultReceiver
 import com.mgkim.libs.webimageview.RequestLocal
 import org.jsoup.Connection
 import org.jsoup.Jsoup
@@ -28,7 +25,7 @@ class GalleryViewModel : BaseViewModel() {
                 if (isSuccess) {
                     mutableImages.value = wrapper.success(obj.getResult())
                 } else {
-                    mutableImages.value = wrapper.error(throw Throwable(), fun() {
+                    mutableImages.value = wrapper.error(obj.exception, fun() {
                         reqImages()
                     })
                 }

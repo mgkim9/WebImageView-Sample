@@ -4,12 +4,15 @@ package com.mgkim.sample.ui.imagesearch.view
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.mgkim.sample.network.dto.kakao.KImageDto
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.mgkim.libs.webimageview.RequestImageOn
+import com.mgkim.libs.webimageview.widget.WebImageView
 import com.mgkim.sample.R
 import com.mgkim.sample.di.module.GlideApp
+import com.mgkim.sample.network.dto.kakao.KImageDto
 import com.mgkim.sample.ui.base.view.BaseRecyclerListAdapter
 import com.mgkim.sample.ui.base.view.BaseViewHolder
-import com.mgkim.libs.webimageview.widget.WebImageView
 
 class SearchImageAdapter(mListener: OnListInteractionListener<KImageDto>?) : BaseRecyclerListAdapter<Void, KImageDto,Void >() {
     init {
@@ -31,8 +34,10 @@ class SearchImageAdapter(mListener: OnListInteractionListener<KImageDto>?) : Bas
 
     private fun createHolder(parent: ViewGroup, viewType: Int): ViewHolder<KImageDto> {
         return when (viewType) {
-            0, 2 -> WebImageViewHolder(parent, R.layout.item_webimage_view)
-            else -> GlideViewHolder(parent, R.layout.item_glide_image)
+            0 -> RequestImageCircleHolder(parent, R.layout.item_search_request_image)
+            1 -> GlideViewCircleHolder(parent, R.layout.item_search_image)
+            2 -> WebImageViewRoundedCornersHolder(parent, R.layout.item_search_webimageview)
+            else -> GlideViewRoundedCornersHolder(parent, R.layout.item_search_image)
         }
     }
 
@@ -43,16 +48,18 @@ class SearchImageAdapter(mListener: OnListInteractionListener<KImageDto>?) : Bas
         }
     }
 
-    inner class GlideViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder<KImageDto>(parent, viewType) {
+    inner class RequestImageCircleHolder(parent: ViewGroup, viewType: Int) :
+        ViewHolder<KImageDto>(parent, viewType) {
         private val ivImage: ImageView = view.findViewById(R.id.iv_image)
         override fun bind(data: KImageDto, position: Int) {
             mIdView.text = data.collection
             mContentView.text = data.display_sitename
-            GlideApp.with(ivImage.context).load(data.thumbnail_url).into(ivImage)
+            RequestImageOn(data.thumbnail_url).makeRounded(0F).into(ivImage)
         }
     }
 
-    inner class WebImageViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder<KImageDto>(parent, viewType) {
+    inner class WebImageViewRoundedCornersHolder(parent: ViewGroup, viewType: Int) :
+        ViewHolder<KImageDto>(parent, viewType) {
         private val ivImage: WebImageView = view.findViewById(R.id.iv_image)
         override fun bind(data: KImageDto, position: Int) {
             mIdView.text = data.collection
@@ -60,4 +67,23 @@ class SearchImageAdapter(mListener: OnListInteractionListener<KImageDto>?) : Bas
             ivImage.setUrl(data.thumbnail_url)
         }
     }
+
+    inner class GlideViewCircleHolder(parent: ViewGroup, viewType: Int) : ViewHolder<KImageDto>(parent, viewType) {
+        private val ivImage: ImageView = view.findViewById(R.id.iv_image)
+        override fun bind(data: KImageDto, position: Int) {
+            mIdView.text = data.collection
+            mContentView.text = data.display_sitename
+            GlideApp.with(ivImage.context).load(data.thumbnail_url).transform(CircleCrop()).into(ivImage)
+        }
+    }
+
+    inner class GlideViewRoundedCornersHolder(parent: ViewGroup, viewType: Int) : ViewHolder<KImageDto>(parent, viewType) {
+        private val ivImage: ImageView = view.findViewById(R.id.iv_image)
+        override fun bind(data: KImageDto, position: Int) {
+            mIdView.text = data.collection
+            mContentView.text = data.display_sitename
+            GlideApp.with(ivImage.context).load(data.thumbnail_url).transform(RoundedCorners(30)).into(ivImage)
+        }
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.mgkim.sample
 
-import com.mgkim.sample.di.component.DaggerAppComponent
 import com.mgkim.libs.webimageview.NetManager
 import com.mgkim.libs.webimageview.NetManagerConfig
+import com.mgkim.sample.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
@@ -19,8 +19,8 @@ class SampleTestApp: DaggerApplication() {
 //                diskCacheOption = NetManagerConfig.DiskCacheOption.ALL_DISK_CACEH,
 //                isMemoryCache = true,
 //                preferredConfig = Bitmap.Config.ARGB_8888,
-                defaultImageResId = R.drawable.ic_default_picture,
-                failImageResId = R.drawable.ic_frown,
+//                defaultImageResId = R.drawable.ic_default_picture,
+//                failImageResId = R.drawable.ic_frown,
                 animResId = android.R.anim.fade_in
 //                progressResId = R.drawable.progress_call,
 //                isResize = true,
