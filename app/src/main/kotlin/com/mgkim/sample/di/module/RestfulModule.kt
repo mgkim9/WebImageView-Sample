@@ -2,6 +2,7 @@ package com.mgkim.sample.di.module
 
 import com.mgkim.sample.network.api.kakao.KSearchApi
 import com.mgkim.sample.constants.BASE_URL
+import com.mgkim.sample.network.api.kakao.KMapApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,6 +20,12 @@ class RestfulModule {
     fun provideKSearchApi(
         @Named("authorized") okHttpClient: OkHttpClient): KSearchApi = getRetrofitBuilder(okHttpClient).create(
         KSearchApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideKMapApi(
+        @Named("authorized") okHttpClient: OkHttpClient): KMapApi = getRetrofitBuilder(okHttpClient).create(
+        KMapApi::class.java)
 
     private fun getRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

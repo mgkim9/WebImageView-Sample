@@ -3,6 +3,10 @@
     package="com.mgkim.sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <meta-data android:name="com.kakao.sdk.AppKey" android:value="4ceb5431c315e0c9e830d64377c31716"/>
+
     <application
         android:name="com.mgkim.sample.SampleTestApp"
         android:allowBackup="true"
